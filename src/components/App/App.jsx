@@ -52,9 +52,7 @@ export class App extends Component {
 
           {contacts.length === 0 ? (
             <>
-              <Note style={{ fontSize: 22 }}>
-                Your phonebook is empty! Add a contact
-              </Note>
+              <Note>Your phonebook is empty! Add a contact</Note>
             </>
           ) : (
             <>
