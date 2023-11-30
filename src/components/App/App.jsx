@@ -33,15 +33,6 @@ export class App extends Component {
     );
   };
 
-  checkContact = () => {
-    if (this.state.contacts.length === 0) {
-      return (
-        <Note style={{ fontSize: 22 }}>
-          Your phonebook is empty! Add a contact
-        </Note>
-      );
-    }
-  };
   // !это  передаю пропсом в КонтактФорм
   formSubmitData = data => {
     this.state.contacts.some(element => element.name === data.name)
@@ -50,18 +41,26 @@ export class App extends Component {
           contacts: [...this.state.contacts, data],
         });
   };
+
   render() {
+    const { filter, contacts } = this.state;
     return (
       <>
         <Conatiner>
           <h1>Phonebook</h1>
           <ContactForm onSubmit={this.formSubmitData} />
 
-          {!this.checkContact() && (
+          {contacts.length === 0 ? (
+            <>
+              <Note style={{ fontSize: 22 }}>
+                Your phonebook is empty! Add a contact
+              </Note>
+            </>
+          ) : (
             <>
               <h2>Contacts</h2>
               <Filter
-                value={this.state.filter}
+                value={filter}
                 onFilterInputChange={this.handleChangeFilter}
               />
 
@@ -71,7 +70,6 @@ export class App extends Component {
               />
             </>
           )}
-          {this.checkContact()}
         </Conatiner>
       </>
     );
